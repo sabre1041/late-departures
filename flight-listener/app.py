@@ -95,7 +95,7 @@ def parse_args(parser):
     args = parser.parse_args()
     args.brokers = get_arg('KAFKA_BROKERS', args.brokers)
     args.input_topic = get_arg('KAFKA_INTOPIC', args.input_topic)
-    args.output_topic = get_arg('KAFKA_OUTOPIC', args.output_topic)
+    args.output_topic = get_arg('KAFKA_OUTTOPIC', args.output_topic)
     return args
 
 
@@ -109,11 +109,12 @@ def main():
         description='process data with Spark, using Kafka as the transport')
     parser.add_argument(
         '--in', dest='input_topic',
-        help='the kafka topic to read data from, env variable: KAFKA_INTOPIC')
+        help='the kafka topic to read data from, env variable: KAFKA_INTOPIC',
+        default='flights')
     parser.add_argument(
         '--out', dest='output_topic',
         help='the kafka topic to publish data to, env variable: '
-        'KAFKA_OUTTOPIC')
+        'KAFKA_OUTTOPIC', default='late')
     parser.add_argument(
         '--brokers', help='the kafka brokers, env variable: KAFKA_BROKERS')
     args = parse_args(parser)
