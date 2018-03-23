@@ -3,6 +3,7 @@
 import argparse
 import datetime
 import json
+import os
 
 import kafka
 import pyspark
@@ -86,6 +87,18 @@ class FlightStreamProcessor():
         self.streaming_context.stop()
 
 
+def get_arg(env, default):
+    return os.getenv(env) if os.getenv(env, '') is not '' else default
+
+
+def parse_args(parser):
+    args = parser.parse_args()
+    args.brokers = get_arg('KAFKA_BROKERS', args.brokers)
+    args.input_topic = get_arg('KAFKA_INTOPIC', args.input_topic)
+    args.output_topic = get_arg('KAFKA_OUTOPIC', args.output_topic)
+    return args
+
+
 def main():
     """The main function
 
@@ -95,12 +108,15 @@ def main():
     parser = argparse.ArgumentParser(
         description='process data with Spark, using Kafka as the transport')
     parser.add_argument(
-        '--in', dest='input_topic', help='the kafka topic to read data from')
+        '--in', dest='input_topic',
+        help='the kafka topic to read data from, env variable: KAFKA_INTOPIC')
     parser.add_argument(
         '--out', dest='output_topic',
-        help='the kafka topic to publish data to')
-    parser.add_argument('--servers', help='the kafka brokers')
-    args = parser.parse_args()
+        help='the kafka topic to publish data to, env variable: '
+        'KAFKA_OUTTOPIC')
+    parser.add_argument(
+        '--servers', help='the kafka brokers, env variable: KAFKA_BROKERS')
+    args = parse_args(parser)
 
     processor = FlightStreamProcessor(
         input_topic=args.input_topic,

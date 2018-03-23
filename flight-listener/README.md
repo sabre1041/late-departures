@@ -7,7 +7,7 @@ departure it will rebroadcast the flight info on a second topic.
 ## usage on openshift
 
 As this project utilizes Spark, it will be easiest to consume on OpenShift by
-using the [RADanalytics](https://radanalytics.io) tooling. The source-to-image
+using the [radanalytics.io](https://radanalytics.io) tooling. The source-to-image
 nature of this application will require that a Spark cluster is available. The
 shortest path to making that connection is to use the automatically spawned
 Spark clusters that are created by the
@@ -29,10 +29,12 @@ for some inspiration on prototyping this process.
               -p APPLICATION_NAME=flight-listener \
               -p GIT_URI=https://github.com/elmiko/late-departures \
               -p CONTEXT_DIR=flight-listener \
-              -p APP_ARGS='--servers=apache-kafka:9092 --in=topic1 --out=topic2'  \
+              -e KAFKA_BROKERS=my-cluster-kafka:9092 \
+              -e KAFKA_INTOPIC=flights \
+              -e KAFKA_OUTTOPIC=late \
               -p SPARK_OPTIONS='--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.0'
    ```
 
 In this example, our application will subscribe to messages on the Kafka topic
-`topic1`, and it will publish messages on the topic `topic2` using the broker
-at `apache-kafka:9092`.
+`flights`, and it will publish messages on the topic `late` using the broker
+at `my-cluster-kafka:9092`.
