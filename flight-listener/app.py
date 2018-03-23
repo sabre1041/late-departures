@@ -121,7 +121,7 @@ def main():
     processor = FlightStreamProcessor(
         input_topic=args.input_topic,
         output_topic=args.output_topic,
-        servers=args.servers,
+        servers=args.brokers,
         duration=30)
 
     processor.start_and_await_termination()
