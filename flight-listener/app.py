@@ -122,7 +122,7 @@ def main():
         input_topic=args.input_topic,
         output_topic=args.output_topic,
         servers=args.brokers,
-        duration=30)
+        duration=3)
 
     processor.start_and_await_termination()
 
