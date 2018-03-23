@@ -28,7 +28,7 @@ for some inspiration on prototyping this process.
    oc new-app --template=oshinko-python-build-dc \
               -p APPLICATION_NAME=flight-listener \
               -p GIT_URI=https://github.com/elmiko/late-departures \
-              --context-dir=flight-listener \
+              -p CONTEXT_DIR=flight-listener \
               -p APP_ARGS='--servers=apache-kafka:9092 --in=topic1 --out=topic2'  \
               -p SPARK_OPTIONS='--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.0'
    ```
