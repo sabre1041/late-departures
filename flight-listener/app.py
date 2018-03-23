@@ -115,7 +115,7 @@ def main():
         help='the kafka topic to publish data to, env variable: '
         'KAFKA_OUTTOPIC')
     parser.add_argument(
-        '--servers', help='the kafka brokers, env variable: KAFKA_BROKERS')
+        '--brokers', help='the kafka brokers, env variable: KAFKA_BROKERS')
     args = parse_args(parser)
 
     processor = FlightStreamProcessor(
