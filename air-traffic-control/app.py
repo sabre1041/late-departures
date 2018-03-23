@@ -53,7 +53,7 @@ def main(args):
                 int(currentflight['day']),
                 hour=int(currentflight['scheduled_departure'][:2]),
                 minute=int(currentflight['scheduled_departure'][2:]))
-        if departuretime >= currenttime or scheduledtime >= currenttime:
+        if departuretime <= currenttime or scheduledtime <= currenttime:
             logging.info('sending flight info for '
                          + currentflight['airline']
                          + currentflight['flight_number'])
