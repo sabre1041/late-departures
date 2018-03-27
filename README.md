@@ -119,3 +119,14 @@ oc new-app --template=oshinko-python-build-dc \
   -e KAFKA_OUTTOPIC=late \
   -p SPARK_OPTIONS='--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.0'
 ```
+
+### Confirming operation
+
+If you have tools available for listening to topic broadcasts on a Kafka
+broker then you are all set to confirm that the late departures are being
+re-broadcast on the second topic from the `flight-listener`.
+
+If you do not have these tools available, the
+[kafka-openshift-python-listener](https://github.com/bones-brigade/kafka-openshift-python-listener)
+project is a simple way to print those messages. Be sure to use your Kafka
+broker address and the re-broadcast topic to inspect those messages.
