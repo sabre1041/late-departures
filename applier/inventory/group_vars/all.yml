@@ -1,0 +1,57 @@
+---
+  openshift_cluster_content:
+  - object: projectrequest
+    content:
+    - name: late-departures-project
+      template: "https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/master/files/projectrequest/template.yml"
+      template_action: create
+      params: "{{ inventory_dir }}/../params/late-departures-project"
+      tags:
+        - projects
+  - object: prerequisites
+    content:
+    - name: "deploy-strimzi"
+      template: "http://strimzi.io/docs/0.1.0/kafka-inmemory/resources/openshift-template.yaml"
+      params: "{{ inventory_dir }}/../params/strimzi"
+      namespace: late-departures
+      tags:
+        - strimzi
+    - name: "deploy-radanalytics"
+      file: "https://radanalytics.io/resources.yaml"
+      namespace: late-departures
+      tags:
+        - radanalytics
+  - object: deployments
+    content:
+    - name: "deploy-air-traffic-control"
+      template: "{{ inventory_dir }}/../templates/air-traffic-control-deployment.yml"
+      params: "{{ inventory_dir }}/../params/air-traffic-control-deployment"
+      namespace: late-departures
+      tags:
+        - apps
+    - name: "deploy-flight-listener"
+      template: "{{ inventory_dir }}/../templates/flight-listener-deployment.yml"
+      params: "{{ inventory_dir }}/../params/flight-listener-deployment"
+      namespace: late-departures
+      tags:
+        - apps
+  - object: builds
+    content:
+    - name: "python-centos-imagestream"
+      template: "{{ inventory_dir }}/../templates/generic-image-stream.yml"
+      params: "{{ inventory_dir }}/../params/python-36-centos7"
+      namespace: late-departures
+      tags:
+        - apps
+    - name: "build-air-traffic-control"
+      template: "{{ inventory_dir }}/../templates/air-traffic-control-build.yml"
+      params: "{{ inventory_dir }}/../params/air-traffic-control-build"
+      namespace: late-departures
+      tags:
+        - apps
+    - name: "build-flight-listener"
+      template: "{{ inventory_dir }}/../templates/flight-listener-build.yml"
+      params: "{{ inventory_dir }}/../params/flight-listener-build"
+      namespace: late-departures
+      tags:
+        - apps

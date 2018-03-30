@@ -1,0 +1,3 @@
+NAMESPACE=late-departures
+NAMESPACE_DISPLAY_NAME=Late Departures Stream Processing
+NAMESPACE_DESCRIPTION=Stream processing flight departure information using Apache Kafka, Apache Spark, and OpenShift

@@ -1,0 +1,4 @@
+KAFKA_OUTTOPIC=late
+KAFKA_INTOPIC=flights
+KAFKA_BROKERS=kafka:9092
+SPARK_OPTIONS='--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.0'
