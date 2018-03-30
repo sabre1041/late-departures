@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: generic-image-stream
+metadata:
+  annotations:
+    description: Generic Image Stream Template
+    tags: imagestream
+  name: generic-image-stream
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    name: ${NAME}
+  spec:
+    dockerImageRepository: ${REPOSITORY}
+parameters:
+- description: The name for the ImageStream.
+  name: NAME
+  required: true
+- description: Repository
+  name: REPOSITORY
+  required: true
