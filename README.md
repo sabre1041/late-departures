@@ -166,3 +166,7 @@ Utilize the following steps to deploy the project
     ```
 
 Once complete, all of the resources should be available in OpenShift
+
+### Customizing the Deployment
+
+As part of the deployment, a series of templates are processed along with other resources. Each template contains an analogous parameter file in the [params](applier/params) folder that can be used to override the default parameters in the template. Feel free to modify these files and their values to customize the application deployment.
