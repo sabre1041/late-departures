@@ -92,9 +92,7 @@ parameters:
   value: air-traffic-control
 - description: Address of the Kafka Brokers.
   name: KAFKA_BROKERS
-  value: kafka:9092
   required: true
 - description: Name of the Kafka Topic
   displayName: Kafka Topic
-  value: flights
   name: KAFKA_TOPIC
