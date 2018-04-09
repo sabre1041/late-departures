@@ -25,7 +25,7 @@ for some inspiration on prototyping this process.
 
 1. launch the skeleton with the following command:
    ```bash
-   oc new-app --template=oshinko-python-build-dc \
+   oc new-app --template=oshinko-python-spark-build-dc \
               -p APPLICATION_NAME=flight-listener \
               -p GIT_URI=https://github.com/elmiko/late-departures \
               -p CONTEXT_DIR=flight-listener \
